@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State var selected = 2
+  @State var selected = 1
     var body: some View {
       TabView(selection: $selected) {
         ListView()
@@ -29,7 +29,8 @@ struct ContentView: View {
               Text("Words")
             }
           }
-        Text("Links")
+        LinksView()
+          .padding(.horizontal, 15)
           .tag(3)
           .tabItem {
             VStack {
