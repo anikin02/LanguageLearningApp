@@ -31,10 +31,15 @@ struct ListView: View {
           
           // cards
           VStack(spacing: 20) {
-            CardItem()
-            CardItem()
+            CardItem {
+              //
+            }
+            CardItem {
+              //
+            }
           }
         }
+        .padding(.horizontal, 15)
       }
       
       Button {
@@ -56,32 +61,83 @@ struct ListView: View {
 }
 
 struct CardItem: View {
+  
+  @State var offsetX: CGFloat = 0
+  
+  var onDelete: ()->()
+  
   var body: some View {
-    VStack(alignment: .leading, spacing: 10) {
-      VStack(alignment: .leading) {
-        Text("EN")
-          .font(.system(size: 12, weight: .black))
-          .padding(.bottom, 5)
-        Text("Car")
-          .font(.system(size: 18, weight: .black))
-          .padding(.bottom, 1)
-        Text("Машина")
-          .font(.system(size: 16, weight: .light))
-      }
+    
+    ZStack(alignment: .trailing) {
+      removeImage()
       
-      Divider()
-      
-      VStack(alignment: .leading) {
-        Text("Description:")
-          .font(.system(size: 12, weight: .black))
-          .foregroundColor(Color("GRAY1"))
-        Text("A road vehicle with an engine, four wheels, and seats for a small number of people")
+      VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading) {
+          Text("EN")
+            .font(.system(size: 12, weight: .black))
+            .padding(.bottom, 5)
+          Text("Car")
+            .font(.system(size: 18, weight: .black))
+            .padding(.bottom, 1)
+          Text("Машина")
+            .font(.system(size: 16, weight: .light))
+        }
+        
+        Divider()
+        
+        VStack(alignment: .leading) {
+          Text("Description:")
+            .font(.system(size: 12, weight: .black))
+            .foregroundColor(Color("GRAY1"))
+          Text("A road vehicle with an engine, four wheels, and seats for a small number of people")
+        }
       }
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .padding(20)
+      .background(Color("GRAY"))
+      .cornerRadius(10)
+      .offset(x: offsetX)
+      .gesture(DragGesture()
+        .onChanged { value in
+          if value.translation.width < 0 {
+            offsetX = value.translation.width
+          }
+        }
+        .onEnded { value in
+          withAnimation {
+            if screenSize().width * 0.8 < -value.translation.width {
+              withAnimation {
+                offsetX = -screenSize().width
+                onDelete()
+              }
+            } else {
+              offsetX = 0
+            }
+          }
+        }
+      )
     }
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .padding(20)
-    .background(Color("GRAY"))
-    .cornerRadius(10)
+  }
+  
+  @ViewBuilder
+  func removeImage() -> some View {
+    Image(systemName: "xmark")
+      .resizable()
+      .frame(width: 10, height: 10)
+      .offset(x: 30)
+      .offset(x: offsetX * 0.5)
+      .scaleEffect(CGSize(width: -offsetX * 0.006,
+                          height: -offsetX * 0.006))
+  }
+  
+}
+
+extension View {
+  func screenSize() -> CGSize {
+    guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+      return .zero
+    }
+    return window.screen.bounds.size
   }
 }
 

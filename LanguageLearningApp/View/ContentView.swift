@@ -17,7 +17,6 @@ struct ContentView: View {
       ZStack {
         TabView(selection: $selected) {
           ListView()
-            .padding(.horizontal, 15)
             .environmentObject(listViewModel)
             .tag(1)
             .tabItem {
