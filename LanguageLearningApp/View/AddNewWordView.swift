@@ -2,7 +2,7 @@
 //  AddNewWordView.swift
 //  LanguageLearningApp
 //
-//  Created by Данил Аникин on 12.08.2024.
+//  Created by anikin02 on 12.08.2024.
 //
 
 import SwiftUI
@@ -11,6 +11,8 @@ struct AddNewWordView: View {
   @State var newWord = String()
   @State var translate = String()
   @State var description = String()
+  
+  @EnvironmentObject var listViewModel: ListViewModel
   
     var body: some View {
       VStack {
@@ -21,7 +23,7 @@ struct AddNewWordView: View {
             .padding(.leading, 16)
           Spacer()
           Button {
-            
+            listViewModel.isShowAddView.toggle()
           } label: {
             Image(systemName: "xmark")
               .resizable()
@@ -65,7 +67,7 @@ struct AddNewWordView: View {
         Spacer()
         
         Button {
-          
+          listViewModel.isShowAddView.toggle()
         } label: {
           Text("Save")
             .padding(.vertical, 13)

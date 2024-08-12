@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ListView: View {
   @State var searhText = String()
+  
+  @EnvironmentObject var listViewModel: ListViewModel
+  
   var body: some View {
     ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
       ScrollView (.vertical, showsIndicators: false) {
@@ -35,7 +38,7 @@ struct ListView: View {
       }
       
       Button {
-        //
+        listViewModel.isShowAddView.toggle()
       } label: {
         ZStack {
           Circle()

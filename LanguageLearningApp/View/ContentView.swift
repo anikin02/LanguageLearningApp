@@ -9,35 +9,46 @@ import SwiftUI
 
 struct ContentView: View {
   @State var selected = 1
+  
+  @ObservedObject var listViewModel = ListViewModel()
+  
     var body: some View {
-      TabView(selection: $selected) {
-        ListView()
-          .padding(.horizontal, 15)
-          .tag(1)
-          .tabItem {
-            VStack {
-              Image(systemName: "list.bullet")
-              Text("List")
+      ZStack {
+        TabView(selection: $selected) {
+          ListView()
+            .padding(.horizontal, 15)
+            .environmentObject(listViewModel)
+            .tag(1)
+            .tabItem {
+              VStack {
+                Image(systemName: "list.bullet")
+                Text("List")
+              }
             }
-          }
-        WordsView()
-          .padding(.horizontal, 15)
-          .tag(2)
-          .tabItem {
-            VStack {
-              Image(systemName: "textformat.abc")
-              Text("Words")
+          WordsView()
+            .padding(.horizontal, 15)
+            .tag(2)
+            .tabItem {
+              VStack {
+                Image(systemName: "textformat.abc")
+                Text("Words")
+              }
             }
-          }
-        LinksView()
-          .padding(.horizontal, 15)
-          .tag(3)
-          .tabItem {
-            VStack {
-              Image(systemName: "link")
-              Text("Links")
+          LinksView()
+            .padding(.horizontal, 15)
+            .tag(3)
+            .tabItem {
+              VStack {
+                Image(systemName: "link")
+                Text("Links")
+              }
             }
-          }
+        }
+        
+        if listViewModel.isShowAddView {
+          AddNewWordView()
+            .environmentObject(listViewModel)
+        }
       }
     }
 }
