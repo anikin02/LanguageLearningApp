@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ListView: View {
   @State var searhText = String()
-    var body: some View {
+  var body: some View {
+    ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
       ScrollView (.vertical, showsIndicators: false) {
         VStack(spacing: 25) {
           // search bar
@@ -29,12 +30,26 @@ struct ListView: View {
           VStack(spacing: 20) {
             CardItem()
             CardItem()
-            CardItem()
           }
         }
-        
       }
+      
+      Button {
+        //
+      } label: {
+        ZStack {
+          Circle()
+            .frame(width: 56, height: 56)
+            .foregroundColor(Color("MAIN"))
+          Image(systemName: "plus")
+            .resizable()
+            .frame(width: 20, height: 20)
+            .foregroundColor(.white)
+        }
+      }
+      .offset(x: -20, y: -30)
     }
+  }
 }
 
 struct CardItem: View {
