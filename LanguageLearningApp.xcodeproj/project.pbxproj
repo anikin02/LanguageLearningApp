@@ -14,6 +14,7 @@
 		7873DAEE2C69EF0B0081A055 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873DAED2C69EF0A0081A055 /* ListView.swift */; };
 		7873DAF02C6A043C0081A055 /* WordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873DAEF2C6A043C0081A055 /* WordsView.swift */; };
 		7873DAF42C6A0DF80081A055 /* LinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873DAF32C6A0DF80081A055 /* LinksView.swift */; };
+		7873DAF82C6A15A10081A055 /* AddNewWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7873DAF72C6A15A10081A055 /* AddNewWordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		7873DAED2C69EF0A0081A055 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		7873DAEF2C6A043C0081A055 /* WordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsView.swift; sourceTree = "<group>"; };
 		7873DAF32C6A0DF80081A055 /* LinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksView.swift; sourceTree = "<group>"; };
+		7873DAF72C6A15A10081A055 /* AddNewWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				7873DAEF2C6A043C0081A055 /* WordsView.swift */,
 				7873DAF32C6A0DF80081A055 /* LinksView.swift */,
 				7873DADC2C69EA000081A055 /* LanguageLearningAppApp.swift */,
+				7873DAF72C6A15A10081A055 /* AddNewWordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7873DAF02C6A043C0081A055 /* WordsView.swift in Sources */,
+				7873DAF82C6A15A10081A055 /* AddNewWordView.swift in Sources */,
 				7873DADF2C69EA000081A055 /* ContentView.swift in Sources */,
 				7873DAF42C6A0DF80081A055 /* LinksView.swift in Sources */,
 				7873DADD2C69EA000081A055 /* LanguageLearningAppApp.swift in Sources */,
