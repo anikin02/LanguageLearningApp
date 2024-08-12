@@ -11,6 +11,7 @@ struct ContentView: View {
   @State var selected = 1
   
   @ObservedObject var listViewModel = ListViewModel()
+  @ObservedObject var linksViewModel = LinksViewModel()
   
     var body: some View {
       ZStack {
@@ -36,6 +37,7 @@ struct ContentView: View {
             }
           LinksView()
             .padding(.horizontal, 15)
+            .environmentObject(linksViewModel)
             .tag(3)
             .tabItem {
               VStack {
@@ -48,6 +50,11 @@ struct ContentView: View {
         if listViewModel.isShowAddView {
           AddNewWordView()
             .environmentObject(listViewModel)
+        }
+        
+        if linksViewModel.isShowAddView {
+          AddNewLinkView()
+            .environmentObject(linksViewModel)
         }
       }
     }
