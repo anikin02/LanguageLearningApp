@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
       TabView {
-        Text("List")
+        ListView()
+          .padding(.horizontal, 15)
           .tag(1)
           .tabItem {
             VStack {
