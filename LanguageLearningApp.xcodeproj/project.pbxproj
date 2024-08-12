@@ -51,8 +51,9 @@
 		7873DADB2C69EA000081A055 /* LanguageLearningApp */ = {
 			isa = PBXGroup;
 			children = (
-				7873DADC2C69EA000081A055 /* LanguageLearningAppApp.swift */,
-				7873DADE2C69EA000081A055 /* ContentView.swift */,
+				7873DAEC2C69EBF90081A055 /* ViewModel */,
+				7873DAEB2C69EBC20081A055 /* View */,
+				7873DAEA2C69EBB60081A055 /* Model */,
 				7873DAE02C69EA020081A055 /* Assets.xcassets */,
 				7873DAE22C69EA020081A055 /* Preview Content */,
 			);
@@ -65,6 +66,29 @@
 				7873DAE32C69EA020081A055 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7873DAEA2C69EBB60081A055 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7873DAEB2C69EBC20081A055 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7873DADE2C69EA000081A055 /* ContentView.swift */,
+				7873DADC2C69EA000081A055 /* LanguageLearningAppApp.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7873DAEC2C69EBF90081A055 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

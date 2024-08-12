@@ -2,7 +2,7 @@
 //  LanguageLearningAppApp.swift
 //  LanguageLearningApp
 //
-//  Created by Данил Аникин on 12.08.2024.
+//  Created by anikin02 on 12.08.2024.
 //
 
 import SwiftUI
