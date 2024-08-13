@@ -17,7 +17,7 @@ struct AddNewWordView: View {
   
   @EnvironmentObject var listViewModel: ListViewModel
   
-  @ObservedResults(WordItem.self) var wordItems
+  @ObservedResults(WordModel.self) var wordItems
   
     var body: some View {
       VStack {
@@ -72,10 +72,10 @@ struct AddNewWordView: View {
         Spacer()
         
         Button {
-          if newWord.count == 0, translate.count == 0 {
+          if newWord.count == 0 && translate.count == 0 {
             showAlert.toggle()
           } else {
-            let word = WordItem()
+            let word = WordModel()
             
             word.word = newWord
             word.wordTranslate = translate

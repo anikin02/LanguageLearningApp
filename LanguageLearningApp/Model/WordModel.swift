@@ -1,5 +1,5 @@
 //
-//  WordItem.swift
+//  WordModel.swift
 //  LanguageLearningApp
 //
 //  Created by anikin02 on 13.08.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class WordItem: Object, ObjectKeyIdentifiable {
+class WordModel: Object, ObjectKeyIdentifiable {
   @Persisted(primaryKey: true) var id: ObjectId
   
   @Persisted var location: String = "EN"

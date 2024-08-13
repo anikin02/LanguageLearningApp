@@ -13,7 +13,7 @@ struct ListView: View {
   
   @EnvironmentObject var listViewModel: ListViewModel
   
-  @ObservedResults(WordItem.self) var wordItems
+  @ObservedResults(WordModel.self, sortDescriptor: SortDescriptor(keyPath: "word", ascending: true)) var wordItems
   
   var body: some View {
     ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
@@ -31,6 +31,7 @@ struct ListView: View {
           .padding(.vertical, 16)
           .background(Color("GRAY"))
           .cornerRadius(10)
+          .searchable(text: $searhText, collection: $wordItems, keyPath: \.word)
           
           // cards
           VStack(spacing: 20) {
@@ -65,9 +66,7 @@ struct ListView: View {
 struct CardItem: View {
   
   @State var offsetX: CGFloat = 0
-  
-  var wordItem: WordItem
-  
+  var wordItem: WordModel
   var onDelete: ()->()
   
   var body: some View {
@@ -87,13 +86,15 @@ struct CardItem: View {
             .font(.system(size: 16, weight: .light))
         }
         
-        Divider()
-        
-        VStack(alignment: .leading) {
-          Text("Description:")
-            .font(.system(size: 12, weight: .black))
-            .foregroundColor(Color("GRAY1"))
-          Text(wordItem.wordDescription)
+        if wordItem.wordDescription.count > 0 {
+          Divider()
+          
+          VStack(alignment: .leading) {
+            Text("Description:")
+              .font(.system(size: 12, weight: .black))
+              .foregroundColor(Color("GRAY1"))
+            Text(wordItem.wordDescription)
+          }
         }
       }
       .frame(maxWidth: .infinity, alignment: .leading)

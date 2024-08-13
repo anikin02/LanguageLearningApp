@@ -35,7 +35,6 @@ struct ContentView: View {
               }
             }
           LinksView()
-            .padding(.horizontal, 15)
             .environmentObject(linksViewModel)
             .tag(3)
             .tabItem {
@@ -53,6 +52,11 @@ struct ContentView: View {
         
         if linksViewModel.isShowAddView {
           AddNewLinkView()
+            .environmentObject(linksViewModel)
+        }
+        
+        if linksViewModel.isShowLinkContent {
+          LinkShowView(urlString: $linksViewModel.openUrl)
             .environmentObject(linksViewModel)
         }
       }

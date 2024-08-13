@@ -6,21 +6,26 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct LinksView: View {
   
   @EnvironmentObject var linksViewModel: LinksViewModel
   
+  @ObservedResults(LinkModel.self) var linkItems
+  
     var body: some View {
       ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
         ScrollView() {
           VStack(spacing: 10) {
-            LinkItem(name: "Lesson 1")
-            LinkItem(name: "English Sentence Structure")
-            LinkItem(name: "British and American English Pronunciation")
-            LinkItem(name: "To and For – 5 Levels")
+            ForEach(linkItems, id: \.id) { item in
+              LinkItem(name: item.nameLink, urlString: item.urlLink) { _ in
+                $linkItems.remove(item)
+              }
+            }
           }
         }
+        .padding(.horizontal, 15)
         .frame(maxWidth: .infinity, alignment: .leading)
         
         Button {
@@ -44,6 +49,11 @@ struct LinksView: View {
 
 struct LinkItem: View {
   var name: String
+  var urlString: String
+  var onDelete: (Bool)->()
+  
+  @EnvironmentObject var linksViewModel: LinksViewModel
+  
   var body: some View {
     HStack {
       HStack(spacing: 15) {
@@ -52,7 +62,7 @@ struct LinkItem: View {
       }
       Spacer()
       Button() {
-        
+        onDelete(true)
       } label: {
         Image(systemName: "xmark")
           .foregroundColor(.black)
@@ -62,6 +72,10 @@ struct LinkItem: View {
     .padding(20)
     .background(Color("GRAY"))
     .cornerRadius(10)
+    .onTapGesture {
+      linksViewModel.openUrl = urlString
+      linksViewModel.isShowLinkContent.toggle()
+    }
   }
 }
 
