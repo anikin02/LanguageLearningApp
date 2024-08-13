@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ListView: View {
   @State var searhText = String()
   
   @EnvironmentObject var listViewModel: ListViewModel
+  
+  @ObservedResults(WordItem.self) var wordItems
   
   var body: some View {
     ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
@@ -31,11 +34,10 @@ struct ListView: View {
           
           // cards
           VStack(spacing: 20) {
-            CardItem {
-              //
-            }
-            CardItem {
-              //
+            ForEach(wordItems, id: \.id) { item in
+              CardItem(wordItem: item) {
+                $wordItems.remove(item)
+              }
             }
           }
         }
@@ -64,6 +66,8 @@ struct CardItem: View {
   
   @State var offsetX: CGFloat = 0
   
+  var wordItem: WordItem
+  
   var onDelete: ()->()
   
   var body: some View {
@@ -73,13 +77,13 @@ struct CardItem: View {
       
       VStack(alignment: .leading, spacing: 10) {
         VStack(alignment: .leading) {
-          Text("EN")
+          Text(wordItem.location)
             .font(.system(size: 12, weight: .black))
             .padding(.bottom, 5)
-          Text("Car")
+          Text(wordItem.word)
             .font(.system(size: 18, weight: .black))
             .padding(.bottom, 1)
-          Text("Машина")
+          Text(wordItem.wordTranslate)
             .font(.system(size: 16, weight: .light))
         }
         
@@ -89,7 +93,7 @@ struct CardItem: View {
           Text("Description:")
             .font(.system(size: 12, weight: .black))
             .foregroundColor(Color("GRAY1"))
-          Text("A road vehicle with an engine, four wheels, and seats for a small number of people")
+          Text(wordItem.wordDescription)
         }
       }
       .frame(maxWidth: .infinity, alignment: .leading)

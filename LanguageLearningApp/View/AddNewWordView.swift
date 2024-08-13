@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct AddNewWordView: View {
   @State var newWord = String()
   @State var translate = String()
   @State var description = String()
   
+  @State var showAlert = false
+  
   @EnvironmentObject var listViewModel: ListViewModel
+  
+  @ObservedResults(WordItem.self) var wordItems
   
     var body: some View {
       VStack {
@@ -55,9 +60,9 @@ struct AddNewWordView: View {
             .padding(.top, 23)
             .padding(.leading, 23)
           HStack {
-            Rectangle()
+            TextEditor(text: $description)
               .frame(height: 90)
-              .opacity(0)
+              .colorMultiply(Color("GRAY"))
           }
           .padding(.vertical, 13)
           .padding(.horizontal, 23)
@@ -67,7 +72,21 @@ struct AddNewWordView: View {
         Spacer()
         
         Button {
-          listViewModel.isShowAddView.toggle()
+          if newWord.count == 0, translate.count == 0 {
+            showAlert.toggle()
+          } else {
+            let word = WordItem()
+            
+            word.word = newWord
+            word.wordTranslate = translate
+            word.wordDescription = description
+            
+            $wordItems.append(word)
+            
+            withAnimation() {
+              listViewModel.isShowAddView.toggle()
+            }
+          }
         } label: {
           Text("Save")
             .padding(.vertical, 13)
@@ -76,6 +95,7 @@ struct AddNewWordView: View {
             .background(Color("MAIN"))
             .clipShape(Capsule())
         }
+        .alert(Text("Empty fields"), isPresented: $showAlert, actions: {})
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .padding(15)
